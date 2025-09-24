@@ -170,8 +170,18 @@ The CI/CD pipeline is configured in `.github/workflows/deploy-gh-pages.yml` and 
 1. Checkout the repository
 2. Set up Python environment
 3. Install dependencies
-4. Copy frontend files to deployment directory
-5. Deploy to GitHub Pages
+4. Clean up unnecessary files
+5. Copy frontend files to deployment directory
+6. Deploy to GitHub Pages
+
+### Setting Up GitHub Pages
+
+To set up GitHub Pages for this repository:
+
+1. Go to your GitHub repository settings
+2. Navigate to the "Pages" section in the left sidebar
+3. Under "Source", select "GitHub Actions" from the dropdown menu
+4. The site will be deployed automatically when you push to the main branch
 
 ### Local Development
 

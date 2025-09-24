@@ -6,9 +6,10 @@ url: "https://ravikumarmn.github.io"
 github:
   is_project_page: true
   repository_url: https://github.com/ravikumarmn/ModernRAG
-  owner_name: Your Name
+  owner_name: Ravi Kumar M N
   owner_url: https://github.com/ravikumarmn
 google_analytics:
 show_downloads: true
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
