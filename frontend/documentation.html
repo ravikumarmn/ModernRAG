@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModernRAG Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-robot me-2"></i>ModernRAG
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="documentation.html">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/ravikumarmn/ModernRAG" target="_blank">
+                            <i class="fab fa-github me-1"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documentation Content -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="sidebar sticky-top pt-3">
+                    <h5>Documentation</h5>
+                    <hr>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#quickstart">Quick Start</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#installation">Installation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#vector-store">Vector Store</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#generation">Generation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#augmentation">Augmentation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#caching">Caching</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#api-reference">API Reference</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <h1>ModernRAG Documentation</h1>
+                <p class="lead">Comprehensive guide to using the ModernRAG system</p>
+                
+                <section id="quickstart" class="mb-5">
+                    <h2>Quick Start</h2>
+                    <p>Get started with ModernRAG in minutes with this quick guide.</p>
+                    
+                    <h4>Basic Usage</h4>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span>Basic Search Example</span>
+                        </div>
+                        <pre><code class="language-python">import asyncio
+from modernrag.vector_store import similarity_search
+
+async def search_example():
+    results = await similarity_search(
+        query="What is RAG?",
+        k=3,
+        score_threshold=0.7
+    )
+    
+    for doc, score in results:
+        print(f"Score: {score:.4f}")
+        print(doc.page_content)
+
+# Run the example
+asyncio.run(search_example())</code></pre>
+                    </div>
+                    
+                    <h4>Full RAG Pipeline</h4>
+                    <div class="code-example mt-4">
+                        <div class="code-header">
+                            <span>Complete RAG Pipeline</span>
+                        </div>
+                        <pre><code class="language-python">import asyncio
+from modernrag.generation import retrieve_augment_generate
+
+async def rag_example():
+    result = await retrieve_augment_generate(
+        query="How does retrieval-augmented generation work?",
+        index_name="my-index",
+        k=4,
+        score_threshold=0.5,
+        rerank_top_k=3
+    )
+    
+    print(f"Query: {result['query']}")
+    print(f"Response: {result['response']}")
+
+asyncio.run(rag_example())</code></pre>
+                    </div>
+                </section>
+                
+                <section id="installation" class="mb-5">
+                    <h2>Installation</h2>
+                    <p>Follow these steps to install ModernRAG:</p>
+                    
+                    <div class="installation-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Clone the repository</h4>
+                                <div class="code-block">
+                                    <pre><code>git clone https://github.com/ravikumarmn/ModernRAG.git
+cd ModernRAG</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Install dependencies</h4>
+                                <div class="code-block">
+                                    <pre><code>pip install -r requirements.txt</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Set up environment variables</h4>
+                                <div class="code-block">
+                                    <pre><code>cp .env.example .env
+# Edit .env with your API keys</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4>Environment Variables</h4>
+                    <p>The following environment variables are required:</p>
+                    <ul>
+                        <li><code>PINECONE_API_KEY</code>: Your Pinecone API key</li>
+                        <li><code>OPENAI_API_KEY</code>: Your OpenAI API key</li>
+                        <li><code>PINECONE_INDEX_NAME</code>: (Optional) Your Pinecone index name, defaults to "langchain-test-index"</li>
+                    </ul>
+                </section>
+                
+                <section id="vector-store" class="mb-5">
+                    <h2>Vector Store</h2>
+                    <p>The vector store module provides functionality for document storage and retrieval using vector embeddings.</p>
+                    
+                    <h4>Key Functions</h4>
+                    <ul>
+                        <li><code>get_vector_store(index_name: str) -> VectorStore</code>: Get a vector store instance</li>
+                        <li><code>check_index_exists(index_name: str) -> bool</code>: Check if an index exists</li>
+                        <li><code>similarity_search(query: str, index_name: str, k: int, score_threshold: float) -> List[Tuple[Document, float]]</code>: Perform a similarity search</li>
+                        <li><code>split_and_upsert_documents(documents: List[Document], index_name: str, batch_size: int) -> bool</code>: Split and upsert documents to the vector store</li>
+                    </ul>
+                    
+                    <h4>Example: Indexing Documents</h4>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span>Indexing Documents</span>
+                        </div>
+                        <pre><code class="language-python">import asyncio
+from langchain.docstore.document import Document
+from modernrag.vector_store import split_and_upsert_documents
+
+async def index_documents():
+    # Create documents
+    documents = [
+        Document(
+            page_content="Retrieval-Augmented Generation (RAG) is a technique that combines retrieval and generation for improved AI responses.",
+            metadata={"source": "example.txt", "page": 1}
+        ),
+        Document(
+            page_content="Vector databases store embeddings of documents for efficient similarity search.",
+            metadata={"source": "example.txt", "page": 2}
+        )
+    ]
+    
+    # Index documents
+    success = await split_and_upsert_documents(
+        documents=documents,
+        index_name="my-index",
+        batch_size=50
+    )
+    
+    if success:
+        print("Documents indexed successfully!")
+    else:
+        print("Failed to index documents")
+
+asyncio.run(index_documents())</code></pre>
+                    </div>
+                </section>
+                
+                <section id="generation" class="mb-5">
+                    <h2>Generation</h2>
+                    <p>The generation module provides functionality for generating responses based on retrieved documents.</p>
+                    
+                    <h4>Key Functions</h4>
+                    <ul>
+                        <li><code>retrieve_augment_generate(query: str, index_name: str, k: int, score_threshold: float, rerank_top_k: int) -> Dict[str, Any]</code>: Run the complete RAG pipeline</li>
+                        <li><code>generate_response(query: str, context: str) -> str</code>: Generate a response based on a query and context</li>
+                    </ul>
+                </section>
+                
+                <section id="augmentation" class="mb-5">
+                    <h2>Augmentation</h2>
+                    <p>The augmentation module provides functionality for improving the relevance of retrieved documents.</p>
+                    
+                    <h4>Key Functions</h4>
+                    <ul>
+                        <li><code>rerank_documents(query: str, documents: List[Tuple[Document, float]], top_k: int) -> List[Tuple[Document, float]]</code>: Rerank documents based on relevance to the query</li>
+                        <li><code>augment_documents(query: str, documents: List[Tuple[Document, float]]) -> str</code>: Synthesize information from multiple documents</li>
+                    </ul>
+                </section>
+                
+                <section id="caching" class="mb-5">
+                    <h2>Caching</h2>
+                    <p>The caching module provides functionality for caching query results to improve performance.</p>
+                    
+                    <h4>Key Functions</h4>
+                    <ul>
+                        <li><code>get_cached_result(query: str) -> Optional[Dict[str, Any]]</code>: Get a cached result for a query</li>
+                        <li><code>cache_result(query: str, result: Dict[str, Any]) -> None</code>: Cache a result for a query</li>
+                        <li><code>clear_cache() -> None</code>: Clear the cache</li>
+                        <li><code>clear_expired_cache() -> None</code>: Clear expired cache entries</li>
+                    </ul>
+                </section>
+                
+                <section id="api-reference" class="mb-5">
+                    <h2>API Reference</h2>
+                    <p>For detailed API reference, please see the <a href="https://github.com/ravikumarmn/ModernRAG/blob/main/docs/vector_store_usage.md">Vector Store Usage</a> documentation.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase mb-4">ModernRAG</h5>
+                    <p>A modern Retrieval-Augmented Generation (RAG) system built with async operations and production-level code.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase mb-4">Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-white">Home</a></li>
+                        <li class="mb-2"><a href="documentation.html" class="text-white">Documentation</a></li>
+                        <li class="mb-2"><a href="https://github.com/ravikumarmn/ModernRAG" class="text-white" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-uppercase mb-4">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://github.com/ravikumarmn/ModernRAG/issues" class="text-white" target="_blank">Report Issues</a></li>
+                        <li class="mb-2"><a href="https://github.com/ravikumarmn/ModernRAG/blob/main/CONTRIBUTING.md" class="text-white" target="_blank">Contribute</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 ModernRAG. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Licensed under <a href="https://opensource.org/licenses/MIT" class="text-white" target="_blank">MIT License</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+theme: jekyll-theme-cayman
+title: ModernRAG
+description: A modern Retrieval-Augmented Generation (RAG) system built with async operations and production-level code.
+baseurl: "/ModernRAG"
+url: "https://ravikumarmn.github.io"
+github:
+  is_project_page: true
+  repository_url: https://github.com/ravikumarmn/ModernRAG
+  owner_name: Your Name
+  owner_url: https://github.com/ravikumarmn
+google_analytics:
+show_downloads: true
+plugins:
+  - jekyll-seo-tag

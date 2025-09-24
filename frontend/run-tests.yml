@@ -1,0 +1,58 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'modernrag/**'
+      - 'tests/**'
+      - 'requirements.txt'
+      - 'setup.py'
+      - '.github/workflows/run-tests.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'modernrag/**'
+      - 'tests/**'
+      - 'requirements.txt'
+      - 'setup.py'
+      - '.github/workflows/run-tests.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, '3.10']
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-asyncio
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -e .
+    
+    - name: Create .env file
+      run: |
+        echo "PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}" > .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        echo "PINECONE_INDEX_NAME=test-index" >> .env
+    
+    - name: Test with pytest
+      run: |
+        pytest -v tests/
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: pytest-results-${{ matrix.python-version }}
+        path: pytest-results.xml
