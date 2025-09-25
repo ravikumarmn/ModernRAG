@@ -13,6 +13,9 @@ A modern Retrieval-Augmented Generation (RAG) system built with async operations
 - **Vector Store Integration**: Seamless integration with Pinecone for vector storage and retrieval
 - **Document Processing**: Tools for document loading, chunking, and embedding
 - **Efficient Retrieval**: Advanced similarity search with configurable parameters
+- **Interactive RAG Demo**: Web-based interface for exploring RAG capabilities
+- **Query Caching**: Comprehensive caching system with memory and disk options
+- **Document Augmentation**: Reranking and synthesis of retrieved documents
 
 ## Installation
 
@@ -196,3 +199,51 @@ python -m http.server 8000
 ```
 
 Then open your browser to `http://localhost:8000`
+
+## Interactive RAG Demo
+
+The project includes an interactive web-based RAG demo that allows users to experience the RAG system in action without setting up the backend infrastructure.
+
+### Demo Features
+
+- **Interactive Query Interface**: Ask questions and get AI-generated responses
+- **Document Visualization**: See which documents were retrieved for each query
+- **Performance Metrics**: View retrieval time, generation time, and total processing time
+- **Sample Queries**: Try pre-defined sample queries to explore different aspects of the system
+
+### Try the Demo
+
+Visit the [ModernRAG Demo](https://ravikumarmn.github.io/ModernRAG/rag.html) to try it out!
+
+## Netlify Deployment
+
+In addition to GitHub Pages for static content, this project uses Netlify Functions to provide serverless backend functionality for the RAG demo.
+
+### Deploying to Netlify
+
+1. **Fork the repository** to your GitHub account
+
+2. **Sign up for Netlify** and connect your GitHub account
+
+3. **Create a new site** from your forked repository
+
+4. **Configure environment variables** in the Netlify dashboard:
+   - `OPENAI_API_KEY`: Your OpenAI API key
+   - `PINECONE_API_KEY`: Your Pinecone API key
+   - `PINECONE_INDEX_NAME`: Your Pinecone index name
+
+5. **Deploy** your site
+
+### Local Development with Netlify Functions
+
+To develop and test Netlify Functions locally:
+
+```bash
+# Install Netlify CLI
+npm install netlify-cli -g
+
+# Start local development server
+netlify dev
+```
+
+This will start a local server that simulates the Netlify environment, including Functions.

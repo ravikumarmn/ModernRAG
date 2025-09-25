@@ -13,3 +13,15 @@ show_downloads: true
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+
+# Custom navigation links
+navigation:
+  - title: Home
+    url: /
+  - title: RAG Demo
+    url: /rag.html
+  - title: Documentation
+    url: /documentation.html
+  - title: GitHub
+    url: https://github.com/ravikumarmn/ModernRAG
+    external: true

@@ -26,6 +26,9 @@
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="rag.html">RAG Demo</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="documentation.html">Documentation</a>
                     </li>
                     <li class="nav-item">
@@ -52,6 +55,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#installation">Installation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#rag-demo">RAG Demo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#vector-store">Vector Store</a>
@@ -173,6 +179,75 @@ cd ModernRAG</code></pre>
                     </ul>
                 </section>
                 
+                <section id="rag-demo" class="mb-5">
+                    <h2>RAG Demo</h2>
+                    <p>ModernRAG includes an interactive web-based demo that allows you to experience the RAG system in action without setting up the backend infrastructure.</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Try the <a href="rag.html" class="alert-link">live RAG demo</a> to see ModernRAG in action!
+                    </div>
+                    
+                    <h4>Features of the RAG Demo</h4>
+                    <ul>
+                        <li><strong>Interactive Query Interface</strong>: Ask questions and get AI-generated responses based on retrieved documents</li>
+                        <li><strong>Document Visualization</strong>: See which documents were retrieved for each query</li>
+                        <li><strong>Performance Metrics</strong>: View retrieval time, generation time, and total processing time</li>
+                        <li><strong>Sample Queries</strong>: Try pre-defined sample queries to explore different aspects of the system</li>
+                    </ul>
+                    
+                    <h4>How the Demo Works</h4>
+                    <p>The RAG demo uses a serverless API to process queries through the following steps:</p>
+                    
+                    <ol>
+                        <li><strong>Query Processing</strong>: Your question is sent to the serverless backend</li>
+                        <li><strong>Document Retrieval</strong>: Relevant documents are retrieved from the vector store</li>
+                        <li><strong>Document Reranking</strong>: Retrieved documents are reranked based on relevance</li>
+                        <li><strong>Context Augmentation</strong>: Information from multiple documents is synthesized</li>
+                        <li><strong>Response Generation</strong>: A comprehensive response is generated based on the augmented context</li>
+                    </ol>
+                    
+                    <h4>Implementation Details</h4>
+                    <p>The demo is implemented using:</p>
+                    <ul>
+                        <li><strong>Frontend</strong>: HTML, CSS, JavaScript with Bootstrap for responsive design</li>
+                        <li><strong>Backend</strong>: Serverless functions deployed on Netlify Functions</li>
+                        <li><strong>API</strong>: RESTful API for query processing and response generation</li>
+                    </ul>
+                    
+                    <h4>Deploying Your Own RAG Demo</h4>
+                    <p>To deploy your own version of the RAG demo:</p>
+                    
+                    <div class="installation-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Fork the ModernRAG repository</h4>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Set up Netlify</h4>
+                                <p>Create a Netlify account and connect it to your GitHub repository</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Configure environment variables</h4>
+                                <p>Add your API keys to Netlify environment variables</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Deploy</h4>
+                                <p>Deploy your site and functions using Netlify's deployment pipeline</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
                 <section id="vector-store" class="mb-5">
                     <h2>Vector Store</h2>
                     <p>The vector store module provides functionality for document storage and retrieval using vector embeddings.</p>
@@ -278,6 +353,7 @@ asyncio.run(index_documents())</code></pre>
                     <h5 class="text-uppercase mb-4">Links</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="index.html" class="text-white">Home</a></li>
+                        <li class="mb-2"><a href="rag.html" class="text-white">RAG Demo</a></li>
                         <li class="mb-2"><a href="documentation.html" class="text-white">Documentation</a></li>
                         <li class="mb-2"><a href="https://github.com/ravikumarmn/ModernRAG" class="text-white" target="_blank">GitHub</a></li>
                     </ul>
